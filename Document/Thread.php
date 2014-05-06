@@ -150,6 +150,18 @@ abstract class Thread extends AbstractThread
 
         // we only need each word once
         $this->keywords = implode(' ', array_unique(str_word_count(mb_strtolower($keywords, 'UTF-8'), 1)));
+        
+        /*  
+            Edit by society 
+            FHM Solutions (France)
+            
+            Comments for MongoDB users' :
+            If the content of $keywords is editing in UTF-8, the function str_word_count doesn't work. 
+            It returns a corrupt chain that's not recognize by MongoDB.
+            Below, it's the solution.
+        */
+        
+        // $this->keywords = implode(' ', array_unique(explode(' ', mb_strtolower($keywords, 'UTF-8'))));
     }
 
     /**
